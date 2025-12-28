@@ -1,26 +1,485 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0e0e0e;
+  --foreground: #dac5a7;
+  --primary: #dac5a7;
+  --surface: #1a1a1a;
+  --border: rgba(218, 197, 167, 0.15);
+  --muted: rgba(218, 197, 167, 0.6);
+  --dark-text: #1d1e1f;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-dark-text: var(--dark-text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Keyframe Animations */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
   }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes audio-bar {
+  0%, 100% {
+    height: 20%;
+  }
+  50% {
+    height: 80%;
+  }
+}
+
+@keyframes equalizer {
+  0%, 100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* Voice Equalizer Animation */
+.voice-equalizer line {
+  transform-origin: center;
+  animation: equalizer 1s ease-in-out infinite;
+}
+
+.voice-equalizer line:nth-child(1) { animation-delay: 0s; }
+.voice-equalizer line:nth-child(2) { animation-delay: 0.15s; }
+.voice-equalizer line:nth-child(3) { animation-delay: 0.3s; }
+.voice-equalizer line:nth-child(4) { animation-delay: 0.45s; }
+.voice-equalizer line:nth-child(5) { animation-delay: 0.3s; }
+.voice-equalizer line:nth-child(6) { animation-delay: 0.15s; }
+.voice-equalizer line:nth-child(7) { animation-delay: 0s; }
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: var(--base-opacity, 1);
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: calc(var(--base-opacity, 1) * 0.7);
+  }
+}
+
+/* Breathwork Animation */
+.breathwork-circles circle {
+  transform-origin: center;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.breathwork-circles circle:nth-child(1) {
+  --base-opacity: 1;
+  animation-delay: 0s;
+}
+.breathwork-circles circle:nth-child(2) {
+  --base-opacity: 0.5;
+  animation-delay: 0.3s;
+}
+.breathwork-circles circle:nth-child(3) {
+  --base-opacity: 0.25;
+  animation-delay: 0.6s;
+}
+
+@keyframes loop-chase {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -150;
+  }
+}
+
+/* LiveLooping Animation */
+.liveloop-icon path {
+  stroke-dasharray: 20 10;
+  animation: loop-chase 3s linear infinite;
+}
+
+.liveloop-icon path:nth-child(2) {
+  animation-direction: reverse;
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  25% {
+    transform: rotate(3deg) translateY(-2px);
+  }
+  75% {
+    transform: rotate(-3deg) translateY(-2px);
+  }
+}
+
+/* Movement Animation */
+.movement-icon {
+  transform-origin: center 70%;
+  animation: sway 4s ease-in-out infinite;
+}
+
+/* ============================================
+   Offering Card Shape Animations
+   ============================================ */
+
+/* Voice Meditation - Sound Ripples */
+@keyframes voice-ripple-expand {
+  0%, 100% {
+    transform: scale(1);
+    opacity: var(--ripple-opacity, 0.15);
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: calc(var(--ripple-opacity, 0.15) * 1.5);
+  }
+}
+
+@keyframes voice-particle-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.15);
+  }
+}
+
+.voice-ripple-1 {
+  --ripple-opacity: 0.2;
+  transform-origin: 0 300px;
+  animation: voice-ripple-expand 4s ease-in-out infinite;
+}
+.voice-ripple-2 {
+  --ripple-opacity: 0.15;
+  transform-origin: 0 300px;
+  animation: voice-ripple-expand 4s ease-in-out infinite 0.5s;
+}
+.voice-ripple-3 {
+  --ripple-opacity: 0.1;
+  transform-origin: 0 300px;
+  animation: voice-ripple-expand 4s ease-in-out infinite 1s;
+}
+.voice-ripple-4 {
+  --ripple-opacity: 0.06;
+  transform-origin: 0 300px;
+  animation: voice-ripple-expand 4s ease-in-out infinite 1.5s;
+}
+
+.voice-particle-1 { animation: voice-particle-float 5s ease-in-out infinite; }
+.voice-particle-2 { animation: voice-particle-float 5s ease-in-out infinite 0.8s; }
+.voice-particle-3 { animation: voice-particle-float 5s ease-in-out infinite 1.6s; }
+
+/* Active Meditation - Organic Flow */
+@keyframes active-sway {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(5px) translateY(-3px); }
+  50% { transform: translateX(0) translateY(-5px); }
+  75% { transform: translateX(-5px) translateY(-3px); }
+}
+
+@keyframes active-breathe-circle {
+  0%, 100% { transform: scale(1); opacity: 0.08; }
+  50% { transform: scale(1.15); opacity: 0.12; }
+}
+
+.active-flow-1 {
+  animation: active-sway 10s ease-in-out infinite;
+  transform-origin: top right;
+}
+
+.active-flow-2 {
+  animation: active-sway 10s ease-in-out infinite 1s;
+  transform-origin: top right;
+}
+
+.active-circle-1 {
+  animation: active-breathe-circle 4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.active-circle-2 {
+  animation: active-breathe-circle 4s ease-in-out infinite 0.8s;
+  transform-origin: center;
+}
+
+/* Sound-Mandala Performance - Layered Mandala */
+@keyframes mandala-rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes mandala-rotate-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes mandala-pulse {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.12; }
+}
+
+@keyframes mandala-dot-float {
+  0%, 100% { transform: translateY(0); opacity: 0.06; }
+  50% { transform: translateY(-5px); opacity: 0.1; }
+}
+
+.mandala-outer {
+  animation: mandala-rotate-slow 30s linear infinite;
+  transform-origin: 320px 80px;
+}
+
+.mandala-middle {
+  animation: mandala-rotate-reverse 25s linear infinite, mandala-pulse 6s ease-in-out infinite;
+  transform-origin: 320px 80px;
+}
+
+.mandala-inner {
+  animation: mandala-rotate-slow 20s linear infinite;
+  transform-origin: 320px 80px;
+}
+
+.mandala-spoke {
+  animation: mandala-rotate-slow 40s linear infinite;
+  transform-origin: 320px 80px;
+}
+
+.mandala-dot-1 { animation: mandala-dot-float 5s ease-in-out infinite; }
+.mandala-dot-2 { animation: mandala-dot-float 5s ease-in-out infinite 1.2s; }
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(20px) rotate(-5deg);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+/* Animation Utilities */
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 40s linear infinite;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 8s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 4s ease-in-out infinite;
+}
+
+/* Scroll Animation Classes */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-animate.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-animate-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.scroll-animate-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.scroll-animate-delay-3 {
+  transition-delay: 0.3s;
+}
+
+.scroll-animate-delay-4 {
+  transition-delay: 0.4s;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-animate {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none;
+  }
+
+  .animate-fade-up,
+  .animate-fade-in,
+  .animate-float,
+  .animate-float-reverse,
+  .animate-spin-slow,
+  .animate-pulse-soft {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .voice-equalizer line {
+    animation: none;
+    transform: none;
+  }
+
+  .breathwork-circles circle {
+    animation: none;
+    transform: none;
+  }
+
+  .liveloop-icon path {
+    animation: none;
+    stroke-dasharray: none;
+  }
+
+  .movement-icon {
+    animation: none;
+    transform: none;
+  }
+
+  /* Offering Card Shapes */
+  .voice-wave-shape circle,
+  .active-flow-shape path,
+  .active-flow-shape circle,
+  .mandala-shape circle,
+  .mandala-shape line {
+    animation: none;
+    transform: none;
+  }
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Glassmorphism Utility */
+.glass {
+  background: rgba(14, 14, 14, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* Gradient Overlays for Marquee */
+.marquee-gradient-left {
+  background: linear-gradient(to right, var(--background), transparent);
+}
+
+.marquee-gradient-right {
+  background: linear-gradient(to left, var(--background), transparent);
 }
