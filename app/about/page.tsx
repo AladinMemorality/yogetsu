@@ -211,7 +211,7 @@ export default function About() {
                     </svg>
                   </Button>
                   <Button
-                    href="https://www.youtube.com/watch?v=tLLGMBFVnWg"
+                    href="https://youtu.be/nvIGCMhjkvw?si=IYFCO1LkYJ7AiJyA"
                     external
                     variant="outline"
                   >
