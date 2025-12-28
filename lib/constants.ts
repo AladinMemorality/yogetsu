@@ -143,7 +143,7 @@ export const PARTNER_LOGOS = [
 
 export const SOCIAL_LINKS = {
   instagram: "https://instagram.com/yogetsu",
-  youtube: "https://youtube.com/@yogetsu",
+  youtube: "https://www.youtube.com/channel/UC9Wesh1nf7vtrMHNF7DtUog",
   spotify: "https://open.spotify.com/artist/5x5CCr6qXbarmVN3K6o32h",
   soundcloud: "https://soundcloud.com/yochanting",
   facebook: "https://www.facebook.com/yochanting",
