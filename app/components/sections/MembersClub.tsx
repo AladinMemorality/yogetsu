@@ -101,7 +101,7 @@ export function MembersClub() {
             <div className="space-y-6">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
-                  src="/images/yogetsu.jpg"
+                  src="/images/yogetsu.webp"
                   alt="Yogetsu Akasaka"
                   fill
                   className="object-cover"
