@@ -190,7 +190,7 @@ export function MembersClub() {
         <AnimatedSection>
           <div className="mt-12 md:mt-16 flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              href="https://www.youtube.com/watch?v=tLLGMBFVnWg"
+              href="https://youtu.be/nvIGCMhjkvw?si=IYFCO1LkYJ7AiJyA"
               external
             >
               Watch Heart Sutra
